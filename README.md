@@ -1,161 +1,189 @@
-# 🍜 Vibe Food App
+# 🍜 Aura Food - Mood-Based Food Recommendations
 
-> **Your AI-powered food ordering companion** - Take a photo, share your vibe, get the perfect order!
+> **Order confidently in 90 seconds** - Capture menu, select vibe, get AI-powered dish recommendations tailored to your mood!
 
-[![JavaScript](https://img.shields.io/badge/JavaScript-ES6+-yellow.svg)](https://www.javascript.com/)
-[![React Native](https://img.shields.io/badge/React%20Native-Expo-blue.svg)](https://expo.dev/)
-[![FastAPI](https://img.shields.io/badge/FastAPI-Python-green.svg)](https://fastapi.tiangolo.com/)
-[![Status](https://img.shields.io/badge/Status-MVP%20Development-orange.svg)]()
+[![React Native](https://img.shields.io/badge/React%20Native-TypeScript-blue.svg)](https://reactnative.dev/)
+[![FastAPI](https://img.shields.io/badge/FastAPI-Python%203.8+-green.svg)](https://fastapi.tiangolo.com/)
+[![GPT-4](https://img.shields.io/badge/AI-GPT--4-purple.svg)](https://openai.com/)
+[![Status](https://img.shields.io/badge/Status-MVP%20Sprint-orange.svg)]()
+[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-## 🎯 Problem We're Solving
+## 🎯 Core Hypothesis (H1)
 
-Non-native speakers and newcomers struggle with:
-- 📖 Understanding unfamiliar menus
-- 😰 Menu decision paralysis
-- 🗣️ Knowing how to order correctly
-- 🎯 Finding dishes that match their mood
+**Users will trust AI food recommendations based on their mood/context enough to follow at least one suggested dish.**
 
-## ✨ Our Solution
+### Target Users
+International students and young professionals (22-35) navigating unfamiliar restaurant menus in real-time dining situations.
 
-**Vibe Food** makes ordering simple:
-1. 📸 **Capture** - Take a photo of any menu
-2. 🎭 **Vibe** - Select your mood with fun bubbles
-3. 📝 **Plan** - Get a personalized order plan
-4. 🧠 **Remember** - App learns your preferences
+### Problem We Solve
+- 🌍 **Language Anxiety**: Non-native speakers struggling with menu terminology
+- ⏱️ **Decision Fatigue**: 50+ unfamiliar items, 10 minutes to decide
+- 🤔 **Trust Barrier**: Uncertainty about dish contents and spice levels
+- 👥 **Group Coordination**: Managing different preferences and dietary needs
+
+## ✨ The Aura Solution
+
+**90-Second Promise**: From confusion to confident order in less time than asking a waiter.
+
+### How It Works
+1. 📸 **Capture** (10s) - Snap a photo of the menu
+2. 🎭 **Vibe** (15s) - Select 1-3 mood bubbles + party size
+3. 🍽️ **Plan** (5s) - Get 3-5 AI-powered dish recommendations
+4. 👆 **Swipe** (10s) - Right to accept, left to skip
+5. ✅ **Confirm** (5s) - Your personalized order ready!
 
 ## 🚀 Quick Start
 
 ### Prerequisites
-- Node.js 16+
+- Node.js 18+
 - Python 3.8+
-- Expo Go app on your phone
-- 10 minutes to set up
+- Expo Go app (iOS/Android)
+- API Keys: OpenAI GPT-4, Google Cloud Vision
 
 ### Installation
 
 ```bash
-# 1. Clone the repository
-git clone https://github.com/yourusername/vibe-food-app.git
-cd vibe-food-app
+# Clone the repository
+git clone https://github.com/yourusername/aura-food-app.git
+cd aura-food-app
 
-# 2. Setup Mobile App (JavaScript/Expo)
+# Frontend Setup (React Native + TypeScript)
 cd mobile
 npm install
+cp .env.example .env  # Add your API keys
 npx expo start
 
-# 3. Setup Backend (Python/FastAPI)
+# Backend Setup (FastAPI + Python)
 cd ../backend
 python3 -m venv venv
 source venv/bin/activate  # Windows: venv\Scripts\activate
 pip install -r requirements.txt
-uvicorn app.main:app --reload
+cp .env.example .env  # Add API keys
+uvicorn app.main:app --reload --port 8000
 
-# 4. Open Expo Go on your phone and scan the QR code!
+# Scan QR code in Expo Go to launch!
 ```
 
-## 📱 Features
+## 🎭 Vibe System (8 Core Moods)
 
-### Current (MVP - Week 1)
-- ✅ Camera menu capture
-- ✅ Location-based restaurant selection
-- ✅ Vibe bubble interface
-- ✅ Smart order plan generation
-- ✅ Basic preference memory
-- ✅ Feedback system
-
-### Coming Soon (Week 2+)
-- 🔜 Real menu OCR
-- 🔜 User accounts
-- 🔜 Social sharing
-- 🔜 Multi-language support
-- 🔜 Payment integration
+| Vibe | Emoji | Intent | Example Dishes |
+|------|-------|--------|----------------|
+| **Comfort** | 😌 | Familiar, warm | Pad Thai, Pizza |
+| **Adventure** | 🔥 | Try new things | Tom Yum, Mole |
+| **Light** | 🥗 | Not heavy | Som Tam, Salads |
+| **Quick** | ⚡ | Fast eating | Tacos, Panini |
+| **Sharing** | 👥 | Group friendly | Nachos, Platters |
+| **Budget** | 💰 | Under $15 | Rice bowls, Pasta |
+| **Healthy** | 💪 | Nutritious | Grilled options |
+| **Indulgent** | 🎉 | Treat yourself | Lasagna, Desserts |
 
 ## 🏗️ Architecture
 
 ```
-┌──────────────┐     ┌──────────────┐     ┌──────────────┐
-│   Mobile     │────▶│   Backend    │────▶│     AI       │
-│  React Native│ API │   FastAPI    │ LLM │   Engines    │
-│  JavaScript  │◀────│   Python     │◀────│   GPT-3.5    │
-└──────────────┘     └──────────────┘     └──────────────┘
+┌─────────────────────────┐
+│   React Native App      │
+│   (TypeScript + Expo)   │
+└───────────┬─────────────┘
+            │ HTTPS/REST
+┌───────────▼─────────────┐
+│   FastAPI Backend       │
+│   /api/v1/* endpoints   │
+└───────────┬─────────────┘
+            │
+┌───────────▼─────────────┐
+│   Services Layer        │
+├─────────────────────────┤
+│ • OCR (Google Vision)   │
+│ • LLM (GPT-4)          │
+│ • Storage (SQLite)      │
+└─────────────────────────┘
 ```
 
 ### Tech Stack
-- **Frontend:** React Native (Expo), JavaScript, Zustand, NativeBase
-- **Backend:** FastAPI, Python, SQLite, SQLAlchemy
-- **AI:** OpenAI GPT-3.5, Custom Reasoning Engine
-- **APIs:** Yelp Fusion, Google Places (optional)
+- **Frontend:** React Native, TypeScript, Expo SDK 49
+- **Backend:** FastAPI, Python 3.8+, Pydantic v2
+- **AI/ML:** OpenAI GPT-4, Google Cloud Vision OCR
+- **Database:** SQLite (MVP), PostgreSQL (Production)
+- **State:** Zustand (Frontend), Session-based (Backend)
 
-## 🎨 UI Preview
+## 🎨 Design System
 
-### Main Screens
-| Capture | Vibe Selection | Order Plan |
-|---------|---------------|------------|
-| 📸 Camera view | 🎭 Mood bubbles | 📝 Smart recommendations |
-| Select restaurant | Express preferences | See order details |
-| Location-based | Fun & intuitive | With ordering phrases |
+### Color Palette
+```css
+--coral-primary: #FF6B6B    /* CTAs, Energy */
+--mint-fresh: #A8E6CF       /* Success states */
+--golden-joy: #FFD93D       /* Celebrations */
+--warm-white: #FAFAF8       /* Backgrounds */
+--soft-black: #2C3E50       /* Text */
+```
+
+### Screen Flow
+| Screen | Purpose | Duration |
+|--------|---------|----------|
+| **Camera Capture** | Menu photo with OCR | 10s |
+| **Vibe Selection** | 8 mood bubbles + party size | 15s |
+| **Swipe Cards** | 3-5 dish recommendations | 10s |
+| **Success** | Order confirmation + celebration | 5s |
 
 ## 📂 Project Structure
 
 ```
-vibe-food-app/
-├── mobile/                 # React Native app
-│   ├── App.js             # Entry point
+aura-food-app/
+├── mobile/                    # React Native Frontend
+│   ├── App.tsx               # Entry point
 │   ├── src/
-│   │   ├── screens/       # App screens
-│   │   ├── components/    # Reusable UI
-│   │   ├── services/      # API calls
-│   │   └── store/         # State management
+│   │   ├── screens/          # Main app screens
+│   │   │   ├── CaptureScreen.tsx
+│   │   │   ├── VibeScreen.tsx
+│   │   │   └── SwipeScreen.tsx
+│   │   ├── components/       # Reusable components
+│   │   │   ├── VibeBubble.tsx
+│   │   │   ├── SwipeCard.tsx
+│   │   │   └── ProgressDots.tsx
+│   │   ├── services/         # API integration
+│   │   └── store/           # Zustand state
 │   └── package.json
 │
-├── backend/               # FastAPI server
+├── backend/                  # FastAPI Backend
 │   ├── app/
-│   │   ├── main.py       # API routes
-│   │   ├── engines/      # AI engines
-│   │   └── models/       # Data models
+│   │   ├── main.py          # FastAPI app
+│   │   ├── routers/         # API endpoints
+│   │   ├── services/        # Business logic
+│   │   │   ├── ocr_service.py
+│   │   │   └── llm_service.py
+│   │   └── models/          # Pydantic schemas
 │   └── requirements.txt
 │
-└── docs/                  # Documentation
-    ├── PRD.md
-    ├── TECHNICAL_SPEC.md
-    └── IMPLEMENTATION_GUIDE.md
+└── docs/                     # Specifications
+    ├── PRD_Complete.md      # Product requirements
+    ├── API_SPEC_MVP.md      # API contracts
+    └── UIUX_SPEC_FINAL.md   # Design specs
 ```
 
-## 🧠 Three-Engine System
+## 📊 MVP Development (7-Day Sprint)
 
-### 1. Reasoning Engine
-Generates personalized order plans based on:
-- Party size & hunger level
-- Selected vibes
-- Restaurant menu
-- User memory
+### Sprint Timeline
 
-### 2. Reflection Engine
-Learns from feedback:
-- Processes ratings
-- Updates preferences
-- Improves future recommendations
+| Day | Frontend (Wenxuan) | Backend (Kai) | Status |
+|-----|-------------------|---------------|---------|
+| **Day 1-2** | Setup React Native + TypeScript | FastAPI + SQLite setup | 🟡 Foundation |
+| | Navigation structure | Session endpoints | |
+| | Camera integration | OCR service setup | |
+| **Day 3-4** | Vibe selection UI | LLM integration | 🔴 Core Features |
+| | Swipe card mechanics | Recommendation engine | |
+| | Local storage | Vibe → dish mapping | |
+| **Day 5-6** | Animations & haptics | Error handling | 🔴 Polish |
+| | Success celebrations | Rate limiting | |
+| | Error recovery flows | Analytics tracking | |
+| **Day 7** | Device testing | Integration tests | 🔴 Testing |
+| | Performance tuning | API documentation | |
+| | User testing (10 users) | Deployment prep | |
 
-### 3. Adaptive Memory
-Remembers your preferences:
-- Dietary restrictions
-- Favorite dishes
-- Ordering patterns
-
-## 📊 Development Progress
-
-### 7-Day Sprint Timeline
-
-| Day | Focus | Status |
-|-----|-------|--------|
-| Day 0 | Project setup | ⏳ In Progress |
-| Day 1 | Camera & Navigation | 🔜 Pending |
-| Day 2 | Vibe UI | 🔜 Pending |
-| Day 3 | AI Engines | 🔜 Pending |
-| Day 4 | Restaurant Data | 🔜 Pending |
-| Day 5 | LLM Integration | 🔜 Pending |
-| Day 6 | Polish & Memory | 🔜 Pending |
-| Day 7 | Testing & Demo | 🔜 Pending |
+### Success Metrics (H1 Validation)
+- ✅ **Primary:** ≥40% users pick at least 1 recommended dish
+- ✅ **Time to decision:** <90 seconds
+- ✅ **Completion rate:** >60% reach confirmation
+- ✅ **Trust indicator:** >50% select ≥2 dishes
 
 ## 🧪 Testing
 
@@ -193,48 +221,71 @@ npm run format
 
 ## 📝 API Documentation
 
-### Core Endpoints
+### Core Endpoints (v1)
 
-#### POST /capture
-```javascript
+#### 1. POST /api/v1/sessions
+Create a new session for the user journey
+```json
 // Request
 {
-  "image": "base64_string",
-  "restaurantId": "thai_house"
+  "device_id": "uuid-optional",
+  "locale": "en-US",
+  "timezone": "America/Los_Angeles"
 }
 
-// Response
+// Response (201)
 {
-  "menuContext": {
-    "restaurant": "Thai House",
-    "cuisine": "Thai",
-    "priceLevel": "$$"
-  }
+  "session_id": "uuid",
+  "created_at": "2024-01-20T12:00:00Z",
+  "expires_at": "2024-01-20T13:00:00Z"
 }
 ```
 
-#### POST /recommend
-```javascript
+#### 2. POST /api/v1/sessions/{session_id}/scan-menu
+Upload menu photo for OCR processing
+```json
 // Request
 {
-  "intent": {
-    "partySize": 2,
-    "vibes": ["comfort", "mild"],
-    "hunger": "normal"
-  },
-  "menuContext": {...},
-  "memory": {...}
+  "image_base64": "base64_string"
 }
 
-// Response
+// Response (200)
 {
-  "orderPlan": {
-    "items": [...],
-    "totalItems": 3,
-    "estimatedCost": "$25-30"
-  }
+  "menu_id": "uuid",
+  "confidence": 0.85,
+  "menu_items": [
+    {
+      "name": "Pad Thai",
+      "description": "Stir-fried rice noodles",
+      "price_range": "$12-14"
+    }
+  ]
 }
 ```
+
+#### 3. POST /api/v1/sessions/{session_id}/recommendations
+Get AI-powered dish recommendations
+```json
+// Request
+{
+  "vibe_id": "uuid",
+  "menu_id": "uuid"
+}
+
+// Response (200)
+{
+  "recommendation_id": "uuid",
+  "recommendations": [
+    {
+      "dish_name": "Pad Thai",
+      "reasoning": "Mild and perfect for first-timers",
+      "confidence": 0.89
+    }
+  ]
+}
+```
+
+[Full API documentation →](./docs/API_SPEC_MVP.md)
 
 ## 🐛 Known Issues
 
@@ -281,7 +332,8 @@ MIT License - see [LICENSE](LICENSE) file
 
 ## 🙏 Acknowledgments
 
-- OpenAI for GPT-3.5 API
+- OpenAI for GPT-4 API
+- Google Cloud Vision for OCR
 - Expo team for amazing mobile tools
 - FastAPI for blazing fast backend
 - You, for trying out our app!
@@ -296,9 +348,9 @@ MIT License - see [LICENSE](LICENSE) file
 
 <div align="center">
 
-**Built with ❤️ in 7 days using JavaScript**
+**Built with ❤️ in 7 days using TypeScript & Python**
 
-*Making food ordering delightful for everyone, everywhere*
+*Making food ordering delightful for international students, everywhere*
 
 [Demo](https://vibefood.app) | [Documentation](./docs) | [Contribute](CONTRIBUTING.md)
 
